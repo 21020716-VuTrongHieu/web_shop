@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head-admin}}
+<body>
+    {{> header-admin}}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="content-header-left">
+                <i class="fa-solid fa-circle-right"></i><span>Đơn hàng</span>
+            </div>
+        </div>
+        <div class="content">
+            <table id="example">
+                <thead>
+                    <tr>
+                        <th style="width: 5vw;">STT</th>
+                        <th style="width: 20vw">Tên khách hàng</th>
+                        <th style="width: 20vw">Mã hóa đơn</th>
+                        <th style="width: 10vw">Số tiền thanh toán (VNĐ)</th>
+                        <th style="width: 10vw">Tình trạng thanh toán</th>
+                        <th style="width: 10vw">Tình trạng giao hàng</th>
+                        <th style="width: 15vw">Thay đổi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        <th>{{sum @index 1}}</th>
+                        <th><img src="" alt="">{{this.user_name}}</th>
+                        <th>{{this._id}}</th>
+                        <th>{{this.total_money}}</th>
+                        {{#if (compareDate this.ship_date)}}
+                            <th>Chưa thanh toán</th>
+                        {{else}}
+                            <th>Thành Công</th>
+                        {{/if}}
+                        {{#if (compareDate this.ship_date)}}
+                            <th>Chưa nhận hàng</th>
+                        {{else}}
+                            <th>Thành Công</th>
+                        {{/if}}
+                        <th>
+                            <button class="btn btn-delete" order_id="{{this._id}}" onclick="removeItem(event,'order', 'order_id')">Xóa</button>
+                        </th>
+                    </tr>
+                    {{/each}}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal hide" id="confirm-delete">
+        <div class="modal-header">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Xóa đơn hàng</span>
+        </div>
+        <div class="modal-body">
+            <span>Bạn có chắc chắn muốn xóa đơn hàng này?</span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="cancel" data-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-danger" id="confirm" data-dismiss="modal">Xóa</button>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

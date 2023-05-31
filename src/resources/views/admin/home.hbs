@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head-admin}}
+<body>
+    {{> header-admin}}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="content-header-left">
+                <i class="fa-solid fa-circle-right"></i><span>Tổng quan</span>
+            </div>
+        </div> 
+
+        <div class="content">
+            <div class="info-box">
+                <div class="info-box__icon">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                </div>
+                <div class="info-box__text">
+                    <span>Sản phẩm</span>
+                </div>
+                <div class="info-box__number">
+                    <span>{{productCount}}</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__icon">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                </div>
+                <div class="info-box__text">
+                    <span>Đơn hàng</span>
+                </div>
+                <div class="info-box__number">
+                    <span>{{orderCount}}</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__icon">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                </div>
+                <div class="info-box__text">
+                    <span>Khách hàng</span>
+                </div>
+                <div class="info-box__number">
+                    <span>{{userCount}}</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box__icon">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                </div>
+                <div class="info-box__text">
+                    <span>Đơn hàng đang giao</span>
+                </div>
+                <div class="info-box__number">
+                    <span>{{orderUnfinishedCount}}</span>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box__icon">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                </div>
+                <div class="info-box__text">
+                    <span>Đơn hàng đã hoàn thành </span>
+                </div>
+                <div class="info-box__number">
+                    <span>{{orderCompletedCount}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script src="/js/admin.js"></script>
+</body>
+</html>

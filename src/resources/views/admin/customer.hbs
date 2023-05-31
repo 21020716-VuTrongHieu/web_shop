@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head-admin}}
+
+<body>
+    {{> header-admin}}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="content-header-left">
+                <i class="fa-solid fa-circle-right"></i><span>Khách hàng</span>
+            </div>
+        </div>
+        <div class="content">
+            <table id="example">
+                <thead>
+                    <tr>
+                        <th style="width: 5vw;">STT</th>
+                        <th style="width: 20vw">Tên khách hàng</th>
+                        <th style="width: 10vw">Giới tính</th>
+                        <th style="width: 15vw">Ngày sinh</th>
+                        <th style="width: 20vw">Email</th>
+                        <th style="width: 10vw">SĐT</th>
+                        <th style="width: 10vw">Thay đổi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <th>{{sum @index 1}}</th>
+                        <th>{{this.name}}</th>
+                        <th>{{this.gender}}</th>
+                        <th>{{dateString this.birthday}}</th>
+                        <th>{{this.email}}</th>
+                        <th>{{this.phone_number}}</th>
+                        <th>
+                            <button class="btn btn-delete" user_id="{{this._id}}"
+                                onclick="removeItem(event, 'customer', 'user_id')">Xóa</button>
+                        </th>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal hide" id="confirm-delete">
+        <div class="modal-header">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Xóa khách hàng</span>
+        </div>
+        <div class="modal-body">
+            <span>Bạn có chắc chắn muốn xóa khách hàng này?</span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="cancel" data-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-danger" id="confirm" data-dismiss="modal">Xóa</button>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+{{!-- <script>
+    function removeUser(event) {
+        var user_id = event.currentTarget.getAttribute("user_id")
+        console.log(user_id)
+        var ReactModalPortal = document.getElementById('ReactModalPortal')
+        ReactModalPortal.classList.remove('hide');
+        var confirm = document.getElementById('confirm')
+        var cancel = document.getElementById('cancel')
+        cancel.onclick = function (event) {
+            ReactModalPortal.classList.add('hide')
+        }
+        confirm.onclick = function (event) {
+            $.ajax({
+                url: '/admin/customer/' + user_id,
+                type: 'DELETE',
+                data: {}
+            })
+                .done(function (data) {
+                    if (data.message) {
+                        window.location.reload();
+                    }
+                })
+                .fail(function (err) {
+                    console.log(err)
+                })
+        }
+    }
+</script> --}}
+
+</html>

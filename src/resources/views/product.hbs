@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/3c35f3eeb3.js" crossorigin="anonymous"></script>
+  <title>Product</title>
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/css/product.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  {{> header}}
+  <div class="product" id="id_Product" _id='{{product._id}}'>
+    <div class="contaner">
+
+
+      <div class="product-content">
+
+        <!--______________________Ảnh __________________-->
+        <div class="product-content-left">
+          <div class="product-content-left-big-img">
+            <img src="{{product.main_image}}" alt="">
+          </div>
+          <div class="product-content-left-small-img">
+            <i class="fa-sharp fa-solid fa-chevron-up prev_button"></i>
+            <div class="box-list-small-img">
+              <div class="list-small-img">
+                <div class="small-img">
+                  <img src="{{product.main_image}}" alt="">
+                </div>
+                <div class="small-img">
+                  <img src="{{getValueAtIndex product.image_ 0}}" alt="">
+                </div>
+                <div class="small-img">
+                  <img src="{{getValueAtIndex product.image_ 1}}" alt="">
+                </div>
+                <div class="small-img">
+                  <img src="{{getValueAtIndex product.image_ 2}}" alt="">
+                </div>
+              </div>
+            </div>
+            <i class="fa-sharp fa-solid fa-chevron-down next_button"></i>
+          </div>
+        </div>
+        <!--_________________________Text____________________________--->
+        <div class="product-content-right">
+          <div class="product-content-right-product-name">
+            <h1>{{product.name}}</h1>
+          </div>
+          <div class="product-content-right-product-price">
+            <p><span class = "money">{{product.price}}</span>
+              {{#if (isNotNull product.old_price)}}
+              <span class="money old-price">{{product.old_price}}</span>
+              {{/if}}
+            </p>
+          </div>
+          <div class="product-content-right-product-size">
+            <p style="font-weight: bold;margin-top: 12px; font-size: 20px;">Size:</p>
+            <div class="size">
+              <span class="selected_size">S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+              <span>XXL</span>
+            </div>
+            <p id="chooseSize" style="font-size: 12px; color:red;">*Vui lòng chọn size</p>
+          </div>
+          <!--______________________Số lượng_______________________--->
+          <div class="quantity">
+            <p style="font-weight: bold; font-size: 20px;">Số lượng:</p>
+            <div class="quantity-adjustment">
+              <i class="fa-sharp fa-solid fa-minus" id="minus"></i>
+              <input type="number" id="amount_product" min="1" max="10" value="1">
+              <i class="fa-sharp fa-solid fa-plus" id="plus"></i>
+            </div>
+            <p id="quantityInStock">103 sản phẩm có sẵn</p>
+          </div>
+
+          <div class="product-content-right-product-button" id="addtocart_button">
+            <button onclick="addToCart()"><i class="fa-solid fa-cart-plus" style="padding-right: 6px;"></i>
+              <p>Thêm vào giỏ hàng</p>
+            </button>
+          </div>
+
+          <div class="product-content-right-bottom">
+            <div class="product-content-right-bottom-top open_content">
+              &#8744;
+            </div>
+
+            <div class="product-content-right-bottom-content-big">
+              <div class="product-content-right-bottom-content-title">
+                <div class="product-content-right-bottom-content-title-item chitiet">
+                  <p>Chi tiết</p>
+                </div>
+                <div class="product-content-right-bottom-content-title-item mo_ta">
+                  <p>Mô tả</p>
+                </div>
+              </div>
+
+              <div class="product-content-right-bottom-content">
+                <div class="product-content-right-bottom-content-chitiet">
+                  <p>{{product.detail}}</p>
+                </div>
+                <div class="product-content-right-bottom-content-mota">
+                  <p>{{product.description}}</p>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">{{> footer}}</div>
+</body>
+<script src="/js/money.js"></script>
+<script>
+  $.ajax({
+    url: '/product/' + $('#id_Product').attr('_id'),
+    type: 'PUT',
+    data: { size: $('.selected_size')[0].innerText }
+  })
+    .done(data => {
+      if (data.remainning <= 0) {
+        amount.min = 0;
+        $('#quantityInStock').text('Sản phẩm tạm hết hàng');
+
+      } else {
+        amount.min = 1;
+        $('#quantityInStock').text(data.remainning + ' sản phẩm có sẵn');
+
+      }
+      amount.value = amount.min
+      amount.max = data.remainning
+    })
+    .fail(err => {
+      console.log(err)
+    })
+
+
+  var input = document.getElementById("amount_product");
+  input.addEventListener("change", function () {
+    var value = parseInt(this.value);
+    var min = parseInt(this.min);
+    var max = parseInt(this.max);
+    if (value < min) {
+      this.value = min;
+    } else if (value > max) {
+      this.value = max;
+    }
+  });
+</script>
+
+<script>
+
+  //--------------------------------------Chon noi dung----------------------------------------------
+  const chitiet = document.querySelector(".chitiet")
+  const mo_ta = document.querySelector(".mo_ta")
+  const content_chitiet = document.querySelector(".product-content-right-bottom-content-chitiet")
+  const content_mo_ta = document.querySelector(".product-content-right-bottom-content-mota")
+
+  if (chitiet) {
+
+    chitiet.addEventListener("click", function () {
+      content_mo_ta.style.display = "none"
+      content_chitiet.style.display = "block"
+      chitiet.style.borderBottom = "2px solid black"
+      mo_ta.style.borderBottom = "1px solid #dddddd"
+    })
+  }
+
+  if (mo_ta) {
+    mo_ta.addEventListener("click", function () {
+      content_mo_ta.style.display = "block"
+      content_chitiet.style.display = "none"
+      chitiet.style.borderBottom = "1px solid #dddddd"
+      mo_ta.style.borderBottom = "2px solid black"
+    })
+  }
+
+  //---------------------------------Mở/đóng nội dung-----------------------------------------
+  const open_content = document.querySelector(".open_content")
+  const content = document.querySelector(".product-content-right-bottom-content-big")
+  if (open_content) {
+
+    open_content.addEventListener("click", function () {
+      if (content.style.display === "none") {
+        content.style.display = "block"
+      }
+      else {
+        content.style.display = "none"
+      }
+    })
+  }
+
+  //-------------------------------------Chuyển ảnh--------------------------------------------
+  const big_img = document.querySelector(".product-content-left-big-img img")
+  const small_imgs = document.querySelectorAll(".product-content-left-small-img img")
+  //console.log(big_img, small_imgs)
+  small_imgs.forEach(function (small_img) {
+    small_img.addEventListener("click", function () {
+      big_img.setAttribute("src", small_img.getAttribute("src"))
+    })
+  });
+
+
+  $(document).ready(function () {
+    $('.list-small-img').slick({
+      autoplaySpeed: 2000,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      vertical: true, // Thêm thuộc tính để chuyển slider theo chiều dọc
+      infinite: false, // không quay tròn
+      swipe: false,
+      prevArrow: '.prev_button',
+      nextArrow: '.next_button'
+    });
+  });
+
+  //-------------------------------------Tăng giảm số lượng------------------------------------
+  const plusIcon = document.getElementById("plus")
+  const minusIcon = document.getElementById("minus")
+  const amount = document.getElementById("amount_product")
+  //console.log(plusIcon, minusIcon, amount);
+  plusIcon.addEventListener("click", function () {
+    if (parseInt(amount.value) < parseInt(amount.max))
+      amount.value = parseInt(amount.value) + 1;
+  })
+  minusIcon.addEventListener("click", function () {
+    if (parseInt(amount.value) > parseInt(amount.min))
+      amount.value = parseInt(amount.value) - 1;
+  })
+
+
+  //-------------------------------------Chọn size---------------------------------------------
+  //var selectedSize = 'S';
+  const sizeList = document.querySelectorAll(".size span")
+  sizeList.forEach(size => {
+    size.onclick = function (event) {
+      sizeList.forEach(size => {
+        size.classList.remove('selected_size')
+      })
+      event.target.classList.add('selected_size')
+      $.ajax({
+        url: '/product/' + $('#id_Product').attr('_id'),
+        type: 'PUT',
+        data: { size: $('.selected_size')[0].innerText }
+      })
+        .done(data => {
+          console.log(data.remainning)
+          if (data.remainning <= 0) {
+            amount.min = 0
+            $('#quantityInStock').text('Sản phẩm tạm hết hàng')
+
+          } else {
+            amount.min = 1
+            $('#quantityInStock').text(data.remainning + ' sản phẩm có sẵn')
+
+          }
+          amount.value = amount.min
+          amount.max = data.remainning
+        })
+        .fail(err => {
+          console.log(err)
+        })
+    }
+  })
+
+
+  function addToCart() {
+    $.ajax({
+      url: '/product/addtocart',
+      timeout: 10000,
+      type: 'POST',
+      data: {
+        _id: $('#id_Product').attr('_id'),
+        size: $('.selected_size')[0].innerText,
+        quantity: $('#amount_product').val()
+      }
+    })
+      .done(function (data) {
+        alert(data.message)
+      })
+      .fail(function (err) {
+        console.log(err)
+      })
+      .always(function (data) {
+      })
+
+  }
+
+</script>
+
+</html>

@@ -1,0 +1,269 @@
+.content {
+    margin-top: 60px;
+}
+
+.container-new {
+    background-color: rgb(228, 240, 250);
+}
+
+.headline {
+    height: 150px;
+    text-align: center;
+    color: rgb(51 51 51);
+    text-decoration: none;
+}
+
+.headline>h2 {
+    font-weight: bold;
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.headline>h3 {
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.product-carousel {
+    display: flex;
+    column-gap: 50px;
+    left: 100px;
+    width: calc(100% - 200px);
+    height: 600px;
+}
+
+
+.product-carousel .slick-slide {
+    margin: 0 25px;
+    border: 2px rgb(207, 207, 207) solid;
+}
+
+.product-carousel .slick-next {
+    width: 30px;
+    height: 30px;
+    top: -50px;
+    right: 20px;
+    background-color: #353535;
+    color: aliceblue;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.product-carousel .slick-prev {
+    width: 30px;
+    height: 30px;
+    top: -50px;
+    right: 60px;
+    background-color: #353535;
+    color: aliceblue;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.product-carousel .slick-track {
+    height: 400px;
+}
+
+
+.product {
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    justify-content: space-around;
+}
+
+.product:hover {
+    margin: 25px calc(auto - 5px);
+    background-color: rgb(124, 129, 129);
+    cursor: pointer;
+}
+
+.product__image {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+
+.product__image>img {
+    width: 100%;
+    height: 100%;
+}
+
+.product:hover .product__image {
+    animation: fading 3s
+}
+
+
+@keyframes fading {
+    0% {
+        opacity: 0.5
+    }
+
+    50% {
+        opacity: 1
+    }
+}
+
+.product__name {
+    height: 50px;
+    color: rgb(14, 8, 8);
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.product__price {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
+    color: #040a42
+}
+
+.product__price span {
+    text-decoration-line: line-through;
+    color: #585858;
+    font-size: 20px;
+}
+
+.item-carousel {
+    height: 600px;
+    width: 100vw;
+}
+
+.item-carousel .slick-track {
+    height: 500px;
+    width: 100vw;
+}
+
+.item-carousel .slick-prev {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    top: 200px;
+    left: 20px;
+    background-color: rgba(245, 222, 179, 0);
+    color: aliceblue;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+}
+
+.item-carousel .slick-prev:hover {
+    background-color: #35353591;
+}
+
+.item-carousel .slick-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    top: 200px;
+    right: 20px;
+    background-color: rgba(245, 222, 179, 0);
+    color: aliceblue;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.item-carousel .slick-next:hover {
+    background-color: #35353591;
+}
+
+.welcome {
+    position: relative;
+}
+
+.welcome-content {
+    position: absolute;
+    top: 30vh;
+    left: 20vw;
+    font-size: 6vw;
+    color: rgb(36, 36, 36);
+}
+
+
+
+
+.welcome1 {
+    animation: flip-vertical 4.5s ease-in-out infinite;
+    color: azure;
+}
+
+.welcome2 {
+    animation: rotate 4.5s linear infinite;
+}
+
+.welcome3 {
+    animation: flip-vertical 4.5s ease-in-out infinite;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+@keyframes flip-vertical {
+    0% {
+        transform: rotateX(90deg);
+    }
+
+    50% {
+        transform: rotateX(0deg);
+    }
+
+    55% {
+        transform: rotateX(-30deg);
+    }
+
+    60% {
+        transform: rotateX(0deg);
+    }
+
+    65% {
+        transform: rotateX(30deg);
+    }
+
+    70% {
+        transform: rotateX(0deg);
+    }
+
+    75% {
+        transform: rotateX(-30deg);
+    }
+
+    80% {
+        transform: rotateX(0deg);
+    }
+
+    85% {
+        transform: rotateX(30deg);
+    }
+
+    90% {
+        transform: rotateX(0deg);
+    }
+
+    95% {
+        transform: rotateX(-30deg);
+    }
+
+    100% {
+        transform: rotateX(0deg);
+    }
+}
