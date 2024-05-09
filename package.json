@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
+    "watch": "--watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "http": "http-server --cors",
     "superstart": "concurrently \"npm start\" \"npm run http\" \"npm run watch\""
@@ -28,13 +28,13 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "mongoose": "^7.0.3",
+    "sass": "^1.77.0",
     "sharp": "^0.32.1",
     "slick-carousel": "^1.8.1",
     "unidecode": "^0.1.8"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "node-sass": "^8.0.0",
     "nodemon": "^2.0.22"
   }
 }
